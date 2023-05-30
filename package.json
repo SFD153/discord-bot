@@ -1,0 +1,45 @@
+{
+    "name": "decktuner-bot",
+    "version": "0.0.1",
+    "description": "Deck Tuner discord bot which facilitates interaction between deck tuners and users to improve their decks.",
+    "main": "index.js",
+    "license": "MIT",
+    "jest": {
+        "testPathIgnorePatterns": [
+            "src",
+            "mocks",
+            "helpers"
+        ]
+    },
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development nodemon -r esm index.js",
+        "start": "cross-env NODE_ENV=production nodemon -r esm index.js",
+        "test": "jest --testRunner=jest-circus/runner"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "canvas": "^2.11.2",
+        "chalk": "^4.1.1",
+        "cross-env": "^7.0.3",
+        "date-fns": "^2.22.1",
+        "discord-buttons": "3.1.1",
+        "discord.js": "^12.5.3",
+        "dotenv": "^10.0.0",
+        "esm": "^3.2.25",
+        "merge-images": "^2.0.0",
+        "parse-domain": "^3.0.3",
+        "pg": "^8.6.0",
+        "pg-hstore": "^2.3.3",
+        "sequelize": "^6.6.2",
+        "stream-json": "^1.7.2",
+        "uuid": "^8.3.2",
+        "valid-url": "^1.0.9"
+    },
+    "devDependencies": {
+        "@babel/plugin-transform-modules-commonjs": "^7.14.0",
+        "jest": "^27.0.6",
+        "jest-circus": "^27.0.6",
+        "nodemon": "^2.0.7",
+        "sequelize-cli": "^6.2.0"
+    }
+}

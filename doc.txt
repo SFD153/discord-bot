@@ -1,0 +1,86 @@
+.: Terms :.
+
+tuning           | -- process of a tuner helping a pilot update their deck
+pilot            | -- user that requests a deck tune
+tuner            | -- user(s) that helps with the tuning
+workshop         | -- channel designated for helping with decks
+questionnaire    | -- the process of questions that will constitute the embed for the tuning board post
+
+
+.: Channels :.
+
+Workshops        | -- category for workshop channels to be created under
+#workshop-<id>   | -- automatically generated channels for pilots and tuners to come together on a specific tuning
+#get-help        | -- designated channel to type the !help command to get started
+#tuning-board    | -- designated channel that will have workshops and tunings posted
+#leaderboard     | -- designated channel that has updated leaderboards for tuners
+#history         | -- mod only channel that shows a history of tunings
+
+
+.: Process :.
+
+1) 
+    -- user types !help in #help to get started
+    // no changes to db
+2) 
+    -- bot pings user in #help channel to confirm that the questionnaire has started and then tells them to check their pm's
+    -- bot pm's user initiating the questionnaire
+    // no changes to db
+3)
+    -- for each question, the bot will send a message to the user asking a question awaiting a response
+        -- validation
+    -- after the user finishes answering each question, the user will be presented a preview of the tuning-board message before confirming
+4)
+    -- the bot will confirm that the post has been created in pm
+    -- a new post will be made in #tuning-board
+    -- the bot will create a new channel under the Workshops category
+        -- the channel will start by posting the tuning-board post, pinging it, and telling the user to be patient while tuners come and help
+    // db createUser
+    // db createWorkshop
+5)
+    -- for each tuner that participates in the channel, their name will be automatically be added to the original post in #tuning-board
+    // db addTunerToWorkshop
+6)
+    -- after the tuning is complete, a tuner or moderator can close the channel by typing !close or by clicking the button under the first message
+    // db deleteWorkshop
+7)
+    -- the user will be pm'd to ask for feedback
+    -- a post will be made in #history channel that dictates details on the tuners and pilot
+8)
+    -- for each tuner that was present during the session, they will be asked to give positive or negative feedback 1 by 1 using discord buttons
+        -- if they give negative feedback they will be asked to give a reason
+    -- a post will be made in #history channel for each positive feedback, as well as negative feedback + reason attached
+    // db updateFeedbackForUser
+
+
+.: Directions :.
+
+-- Never manually delete a workshop channel. Use !close command to close a workshop
+    -- If you manually delete a workshop channel, it will not be removed from the database, resulting in stale unused data
+-- Some role names cannot change
+    -- The name of these roles are important to the bots functionality and cannot change (case insensitive)
+    -- If you would like to change the name of these roles, the code must be edited to reflect the changes
+    -- Note however that you may delete the roles or edit them
+    -- Tuner
+    -- Moderator
+    -- Admin
+-- Permissions conflicts
+    -- Allowing any members to create roles means they will be able to create a role named "Tuner", "Moderator", or "Admin" which means they will be able to close workshops prematurely
+-- Do not close a workshop until the pilot is ready to process feedback
+    -- This might need to be an added feature to the bot. 
+
+.: Known Issues :.
+
+-- if you spam messages in pm, bot will forbid you from working. need to create a !close/!cancel command in channel
+    -- the bot will eventually cancel but its still not good
+
+.: Test Cases :.
+
+.: Recent Changes :.
+-- Added the ability for the designated pilot of a workshop to close their own channel. Tuners/moderators/admins can still close channels, but make sure the pilot is available to answer feedback immediately.
+-- Added a thank you message when users finish answering feedback when closing a workshop.
+-- Question prompt for budget category changed to be more descriptive. 
+-- Posts in #tuning-board will now be removed once the workshop is closed. (Old posts remain for now.)
+-- When completing the questionnaire to open a workshop, the final message will include directions for how to find the workshop channel.
+
+-- Fixed: Links from approved websites should always be accepted now whether or not they contain the www subdomain. 

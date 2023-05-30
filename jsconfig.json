@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@handlers/*": ["src/handlers/*"]
+        }
+    },
+    "checkjs": true
+}
